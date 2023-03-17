@@ -1,6 +1,7 @@
 #include <iostream>
 
 #include <Physic/rigidbody.h>
+#include <Game/game.h>
 
 int main() {
     Physic::Rigidbody rb(Geometry::Vector2D(), 10);
@@ -10,6 +11,9 @@ int main() {
         rb.Update(0.1);
         std::cout << "Position: (" << rb.position.x << ", " << rb.position.y << ")" << std::endl;
     }
+
+    Engine::Game app;
+    app.OpenWindow();
 
     return 0;
 }
