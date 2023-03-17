@@ -6,7 +6,10 @@
 
 namespace Engine {
     Game::Game() {
-        _isRunning = true;
+        _running = true;
+
+        _window = nullptr;
+        _renderer = nullptr;
     }
 
     void Game::Input() {
@@ -18,7 +21,7 @@ namespace Engine {
                     }
                     break;
                 case SDL_QUIT:
-                    _isRunning = false;
+                    _running = false;
                     break;
             }
         }
@@ -29,21 +32,21 @@ namespace Engine {
     }
 
     void Game::Render() {
-
+        SDL_UpdateWindowSurface(_window);
     }
 
     void Game::OpenWindow() {
         SDL_Init(SDL_INIT_VIDEO);
-        SDL_Window *window = SDL_CreateWindow("My Window", 0, 0, 800, 600, 0);
-        SDL_Renderer *renderer = SDL_CreateRenderer(window, -1, 0);
+        _window = SDL_CreateWindow("My Window", 0, 0, 800, 600, 0);
+        _renderer = SDL_CreateRenderer(_window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
 
-        while (_isRunning) {
+        while (_running) {
             Input();
             Update();
             Render();
         }
 
-        SDL_DestroyRenderer(renderer);
-        SDL_DestroyWindow(window);
+        SDL_DestroyRenderer(_renderer);
+        SDL_DestroyWindow(_window);
     }
 } // Engine

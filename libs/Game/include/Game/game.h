@@ -23,7 +23,9 @@ namespace Engine {
         void OpenWindow();
 
     private:
-        bool _isRunning;
+        bool _running;
+        SDL_Window *_window;
+        SDL_Renderer *_renderer;
     };
 
 } // Engine
