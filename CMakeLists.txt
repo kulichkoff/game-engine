@@ -12,6 +12,8 @@ set(LIBRARIES
 find_package(SDL2 REQUIRED)
 include_directories(game-engine ${SDL2_INCLUDE_DIRS})
 
+file(COPY assets DESTINATION ${CMAKE_BINARY_DIR})
+
 add_executable(game-engine src/main.cpp)
 
 foreach(LIB ${LIBRARIES})
